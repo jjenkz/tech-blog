@@ -20,4 +20,4 @@ router.get("/", async (req, res) => {
 
 //delete a user
 
-module.exports = User;
+// module.exports = User;

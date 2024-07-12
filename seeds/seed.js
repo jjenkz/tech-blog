@@ -18,7 +18,9 @@ const seeder = async () => {
   for (const post of postData) {
     await Post.create({
       ...post,
-      userId: users[Math.floor(Math.random() * userData.length)].isSoftDeleted,
+      userId: users[Math.floor(Math.random() * users.length)].id,
     });
   }
 };
+
+seeder();
