@@ -3,14 +3,12 @@ const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 
 //REGISTER a USER
+//http://localhost
 router.post("/", async (req, res) => {
   try {
-    const encryptedPassword = await bcrypt.hash(newUser.password, 10);
+    // const encryptedPassword = await bcrypt.hash(newUser.password, 10);
 
-    const newUser = await User.create({
-      username: req.body.username,
-      password: encryptedPassword,
-    });
+    const newUser = await User.create(req.body);
 
     console.log(newUser);
 
@@ -25,7 +23,7 @@ router.post("/", async (req, res) => {
 });
 
 //LOGIN a USER
-router.post("/login", async (req, res) => {
+router.post("/user", async (req, res) => {
   try {
     const username = req.body.username;
     const password = req.body.password;
@@ -42,9 +40,25 @@ router.post("/login", async (req, res) => {
       }
 
       const authenticated = bcrypt.compare(password, userData.password);
+
+      if (authenticated) {
+        return res.json({ message: "You are logged in" });
+      } else {
+        res.json({ messgae: "Incorrect credentials" });
+      }
     }
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.post("/logout", async (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
   }
 });
 

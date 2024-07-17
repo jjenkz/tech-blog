@@ -11,7 +11,10 @@ const seeder = async () => {
   //what are the asynchronous operations
   await sequelize.sync({ force: true });
 
-  const users = await User.bulkCreate(userData);
+  const users = await User.bulkCreate(userData, {
+    individualHooks: true,
+    returning: true,
+  });
 
   //now have to create bulk post data with also a userId
 
