@@ -1,14 +1,10 @@
 const sequelize = require("../config/connection");
+const { User, Post } = require("../models");
 
-const { User, Post, Comment } = require("../models");
+const userData = require("./userData.json");
+const postData = require("./postData.json");
 
-const userData = require("./userSeed.json");
-const postData = require("./postSeed.json");
-
-//create async function
-
-const seeder = async () => {
-  //what are the asynchronous operations
+const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
   const users = await User.bulkCreate(userData, {
@@ -16,14 +12,14 @@ const seeder = async () => {
     returning: true,
   });
 
-  //now have to create bulk post data with also a userId
-
   for (const post of postData) {
     await Post.create({
       ...post,
       userId: users[Math.floor(Math.random() * users.length)].id,
     });
   }
+
+  process.exit(0);
 };
 
-seeder();
+seedDatabase();

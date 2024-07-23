@@ -1,22 +1,14 @@
 [
   {
-    "title": "Coding",
-    "content": "Always be coding"
+    "title": "Music Near Me",
+    "body": "A mobile app that will send you notifications whenever a concert is playing in your area."
   },
   {
-    "title": "React",
-    "content": "The past, present, and future"
+    "title": "The Ultimate Tech Quiz",
+    "body": "A web app that will give users 10 new technical questions each day and track their progress in things like programming, cybersecurity, database architecture, and more!"
   },
   {
-    "title": "SQL",
-    "content": "It's pronounced liked squeal"
-  },
-  {
-    "title": "Handlebars",
-    "content": "A superpower HTML"
-  },
-  {
-    "title": "ORM",
-    "content": "Is ORM better than SQL?"
+    "title": "Roll 'Em Up",
+    "body": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes."
   }
 ]

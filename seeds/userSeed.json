@@ -1,7 +1,14 @@
 [
-  { "username": "jjenkz", "password": "password" },
-  { "username": "bbagz", "password": "password1" },
-  { "username": "mlaza", "password": "password2" },
-  { "username": "lreynolds", "password": "password3" },
-  { "username": "bmacho", "password": "password4" }
+  {
+    "username": "Sal",
+    "password": "password12345"
+  },
+  {
+    "username": "Lernantino",
+    "password": "password12345"
+  },
+  {
+    "username": "Amiko",
+    "password": "password12345"
+  }
 ]
