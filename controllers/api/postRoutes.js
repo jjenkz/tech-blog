@@ -1,53 +1,49 @@
 const router = require("express").Router();
-const Post = require("../../models/Post");
-const { withAuth } = require("../../utils/auth");
+const { Post } = require("../../models/");
+const { apiGuard } = require("../../utils/authGuard");
 
-//ROUTES
+router.post("/", apiGuard, async (req, res) => {
+  const body = req.body;
 
-//http:/localhost:3001/api/users
-router.get("/", async (req, res) => {
   try {
-    const postData = await Post.findAll();
-    res.status(200).json(postData);
+    const newPost = await Post.create({ ...body, userId: req.session.user_id });
+    res.json(newPost);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//http://localhost:3001/api/posts
-router.post("/", withAuth, async (req, res) => {
+router.put("/:id", apiGuard, async (req, res) => {
   try {
-    const newPost = await Post.create(req.body);
-
-    res.status(200).json(newPost);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedPost = await Post.update(req.body, {
+    const [affectedRows] = await Post.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
 
-    res.status(200).json(updatedPost);
+    if (affectedRows > 0) {
+      res.status(200).end();
+    } else {
+      res.status(404).end();
+    }
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", apiGuard, async (req, res) => {
   try {
-    const deletedPost = await Post.destroy({
+    const [affectedRows] = Post.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    res.status(200).json(deletedPost);
+    if (affectedRows > 0) {
+      res.status(200).end();
+    } else {
+      res.status(404).end();
+    }
   } catch (err) {
     res.status(500).json(err);
   }
