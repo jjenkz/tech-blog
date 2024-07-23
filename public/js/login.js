@@ -1,11 +1,29 @@
-const handleLoginForm = async (event) => {
+const loginFormHandler = async function (event) {
   event.preventDefault();
 
-  //capture user values
+  const usernameEl = document
+    .querySelector("#username-input-login")
+    .value.trim();
+  const passwordEl = document
+    .querySelector("#password-input-login")
+    .value.trim();
 
-  //fetch to backend API to crate new user record
+  const response = await fetch("/api/users/login", {
+    method: "POST",
+    body: JSON.stringify({
+      username: usernameEl,
+      password: passwordEl,
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
 
-  //what do we want to do when the response comes back from the server
-
-  //bind an event listener
+  if (response.ok) {
+    document.location.replace("/");
+  } else {
+    alert("Failed to login");
+  }
 };
+
+document
+  .querySelector("#login-form")
+  .addEventListener("submit", loginFormHandler);
