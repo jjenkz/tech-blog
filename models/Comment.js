@@ -11,7 +11,7 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    details: {
+    body: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -19,6 +19,7 @@ Comment.init(
   {
     sequelize,
     freezeTableName: true,
+    underscored: true,
     modelName: "comment",
   }
 );

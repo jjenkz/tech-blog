@@ -1,5 +1,3 @@
-//define our sequelize associations
-
 const User = require("./User");
 const Post = require("./Post");
 const Comment = require("./Comment");
@@ -19,4 +17,8 @@ Comment.belongsTo(User, {
   onDelete: "CASCADE",
 });
 
-module.exports = { User, Post, Comment };
+module.exports = {
+  User,
+  Post,
+  Comment,
+};
